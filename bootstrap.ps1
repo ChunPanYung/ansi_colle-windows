@@ -10,10 +10,12 @@ if ($PSVersionTable.PSVersion.Major -lt 5) {
     exit 1
 }
 
-# Install the OpenSSH Client
-Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0
+Get-WindowsCapability -Name OpenSSH.Server* -Online |
+    Add-WindowsCapability -Online
+}
 # Install the OpenSSH Server
-Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
+Get-WindowsCapability -Name OpenSSH.Client* -Online |
+    Add-WindowsCapability -Online
 
 # Create .ssh directory for user account
 if (-not (Test-Path -Path "$env:USERPROFILE\.ssh")) {
@@ -37,27 +39,44 @@ if (-not (Test-Path -PathType leaf -Path $GlobalAuthorizedKeys)) {
 # Grand permission to $GlobalAuthorizedKeys file
 icacls.exe $GlobalAuthorizedKeys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 
+# Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
+if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
+    Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
+    $firewallParams = @{
+            Name = 'OpenSSH-Server-In-TCP'
+            DisplayName = 'OpenSSH Server (sshd)'
+            Action = 'Allow'
+            Direction = 'Inbound'
+            Enabled = 'True'  # enum type
+            Profile = 'Any'
+            Protocol = 'TCP'
+            LocalPort = 22
+        }
+    New-NetFirewallRule @firewallParams
+} else {
+    Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
+}
+
 # Start the sshd service now
 Start-Service sshd
 # Start service automatically
 Set-Service -Name sshd -StartupType 'Automatic'
 
-# Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
-if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
-    Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
-    New-NetFirewallRule -Name 'OpenSSH-Server-In-TCP' -DisplayName 'OpenSSH Server (sshd)'
-        -Enabled True -Direction Inbound -Protocol TCP -Action Allow -LocalPort 22
-} else {
-    Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
-}
+# By default, the ssh-agent service is disabled. Configure it to start automatically.
+# Run the following command as an administrator.
+Get-Service ssh-agent | Set-Service -StartupType 'Automatic'
+# Start the service.
+Start-Service ssh-agent
 
 # Set the default shell to be PowerShell
-New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell `
-    -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" `
-    -PropertyType String -Force
-
-# Enable File and Printer Sharing on private network (for SSH connection)
-Set-NetFirewallRule -DisplayGroup "File And Printer Sharing" -Enabled True -Profile Private
+$NewItemPropertyParams = @{
+    Path         = "HKLM:\SOFTWARE\OpenSSH"
+    Name         = "DefaultShell"
+    Value        = "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe"
+    PropertyType = "String"
+    Force        = $true
+}
+New-ItemProperty @NewItemPropertyParams
 
 Write-Output "SSH Bootstrap done!"
 [string]$Link = "https://learn.microsoft.com/en-us/windows-server/administration/openssh/openssh_keymanagement#deploying-the-public-key"
