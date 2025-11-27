@@ -37,13 +37,11 @@ function Install-SSH {
 
 function Set-SSH {
     # Create .ssh directory for user account
-    if (-not (Test-Path -Path "$env:USERPROFILE\.ssh")) {
-        New-Item -ItemType "directory" -Path "$nev:USERPORFILE\.ssh"
-    }
+    New-Item -Force -ItemType "directory" -Path "$nev:USERPROFILE\.ssh"
     # Create authorized_keys file for user account
-    if (-not (Test-Path -PathType leaf -Path "$env:USERPROFILE\.ssh\authorized_keys")) {
-        New-Item -ItemType "file" -Path "$env:USERPORFILE\.ssh\authorized_keys"
-    }
+    New-Item -Force -ItemType "file" -Path "$env:USERPROFILE\.ssh\authorized_keys"
+    # Create .ssh directory on user profile
+    New-Item -Force -ItemType Directory -Path $env:USERPROFILE\.ssh
 
     # Enable key based authorization on ssh
     [string]$GlobalSSH = "$env:ProgramData\ssh\sshd_config"
