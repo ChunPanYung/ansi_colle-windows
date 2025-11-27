@@ -1,3 +1,6 @@
+# Enable printing CLI as it runs
+Set-PSDebug -Trace 1
+
 $IsAdmin = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 if (-not $IsAdmin) {
@@ -10,63 +13,72 @@ if ($PSVersionTable.PSVersion.Major -lt 5) {
     exit 1
 }
 
-Get-WindowsCapability -Name OpenSSH.Server* -Online |
-    Add-WindowsCapability -Online
-}
-# Install the OpenSSH Server
-Get-WindowsCapability -Name OpenSSH.Client* -Online |
-    Add-WindowsCapability -Online
+function Install-SSH {
 
-# Create .ssh directory for user account
-if (-not (Test-Path -Path "$env:USERPROFILE\.ssh")) {
-    New-Item -ItemType "directory" -Path "$nev:USERPORFILE\.ssh"
-}
-# Create authorized_keys file for user account
-if (-not (Test-Path -PathType leaf -Path "$env:USERPROFILE\.ssh\authorized_keys")) {
-    New-Item -ItemType "file" -Path "$env:USERPORFILE\.ssh\authorized_keys"
-}
+    Get-WindowsCapability -Name OpenSSH.Server* -Online |
+        Add-WindowsCapability -Online
 
-# Enable key based authorization on ssh
-[string]$GlobalSSH = "$env:ProgramData\ssh\sshd_config"
-(Get-Content $GlobalSSH).replace('#PubkeyAuthentication yes', 'PubkeyAuthentication yes') |
-    Set-Content $GlobalSSH
+    # Install the OpenSSH Server
+    Get-WindowsCapability -Name OpenSSH.Client* -Online |
+        Add-WindowsCapability -Online
 
-# Setup authorized_keys file for Administrators for Windows
-[string]$GlobalAuthorizedKeys = "$env:ProgramData\ssh\administrators_authorized_keys"
-if (-not (Test-Path -PathType leaf -Path $GlobalAuthorizedKeys)) {
-    New-Item -ItemType "file" -Path $GlobalAuthorizedKeys
-}
-# Grand permission to $GlobalAuthorizedKeys file
-icacls.exe $GlobalAuthorizedKeys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+    # Start the sshd service now
+    Start-Service sshd
+    # Start service automatically
+    Set-Service -Name sshd -StartupType 'Automatic'
 
-# Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
-if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
-    Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
-    $firewallParams = @{
-            Name = 'OpenSSH-Server-In-TCP'
-            DisplayName = 'OpenSSH Server (sshd)'
-            Action = 'Allow'
-            Direction = 'Inbound'
-            Enabled = 'True'  # enum type
-            Profile = 'Any'
-            Protocol = 'TCP'
-            LocalPort = 22
-        }
-    New-NetFirewallRule @firewallParams
-} else {
-    Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
+    # By default, the ssh-agent service is disabled. Configure it to start automatically.
+    # Run the following command as an administrator.
+    Get-Service ssh-agent | Set-Service -StartupType 'Automatic'
+    # Start the service.
+    Start-Service ssh-agent
+
 }
 
-# Start the sshd service now
-Start-Service sshd
-# Start service automatically
-Set-Service -Name sshd -StartupType 'Automatic'
+function Set-SSH {
+    # Create .ssh directory for user account
+    if (-not (Test-Path -Path "$env:USERPROFILE\.ssh")) {
+        New-Item -ItemType "directory" -Path "$nev:USERPORFILE\.ssh"
+    }
+    # Create authorized_keys file for user account
+    if (-not (Test-Path -PathType leaf -Path "$env:USERPROFILE\.ssh\authorized_keys")) {
+        New-Item -ItemType "file" -Path "$env:USERPORFILE\.ssh\authorized_keys"
+    }
 
-# By default, the ssh-agent service is disabled. Configure it to start automatically.
-# Run the following command as an administrator.
-Get-Service ssh-agent | Set-Service -StartupType 'Automatic'
-# Start the service.
-Start-Service ssh-agent
+    # Enable key based authorization on ssh
+    [string]$GlobalSSH = "$env:ProgramData\ssh\sshd_config"
+    (Get-Content $GlobalSSH).replace('#PubkeyAuthentication yes', 'PubkeyAuthentication yes') |
+        Set-Content $GlobalSSH
+
+    # Setup authorized_keys file for Administrators for Windows
+    [string]$GlobalAuthorizedKeys = "$env:ProgramData\ssh\administrators_authorized_keys"
+    if (-not (Test-Path -PathType leaf -Path $GlobalAuthorizedKeys)) {
+        New-Item -ItemType "file" -Path $GlobalAuthorizedKeys
+    }
+    # Grand permission to $GlobalAuthorizedKeys file
+    icacls.exe $GlobalAuthorizedKeys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
+
+    # Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
+    if (!(Get-NetFirewallRule -Name "OpenSSH-Server-In-TCP" -ErrorAction SilentlyContinue | Select-Object Name, Enabled)) {
+        Write-Output "Firewall Rule 'OpenSSH-Server-In-TCP' does not exist, creating it..."
+        $firewallParams = @{
+                Name = 'OpenSSH-Server-In-TCP'
+                DisplayName = 'OpenSSH Server (sshd)'
+                Action = 'Allow'
+                Direction = 'Inbound'
+                Enabled = 'True'  # enum type
+                Profile = 'Any'
+                Protocol = 'TCP'
+                LocalPort = 22
+            }
+        New-NetFirewallRule @firewallParams
+    } else {
+        Write-Output "Firewall rule 'OpenSSH-Server-In-TCP' has been created and exists."
+    }
+}
+
+Install-SSH
+Set-SSH
 
 # Set the default shell to be PowerShell
 $NewItemPropertyParams = @{
