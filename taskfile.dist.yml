@@ -49,9 +49,10 @@ tasks:
       - task: install:local
       - mkdir --parent {{.DIST_DOCS}}
       - antsibull-docs sphinx-init --use-current --squash-hierarchy --dest-dir {{.DIST_DOCS}} {{.COLLECTION_NAME}}
-      - pip install --requirement {{.ROOT_DIR}}/dist/docs/requirements.txt
+      - uv pip install --requirement {{.ROOT_DIR}}/dist/docs/requirements.txt
       - "{{.ROOT_DIR}}/dist/docs/build.sh"
-      -  # Docs site should be located @ `build/html/index.html`
+      - cmd: echo "Docs site should be located @ '{{.ROOT_DIR}}/dist/docs/build/html/index.html'"
+        slient: true
 
   watch:docs:
     desc: Watch changes on `argument_specs.yml` file and create docsite when changed.
