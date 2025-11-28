@@ -76,7 +76,7 @@ function Set-SSH {
 Install-SSH
 Set-SSH
 
-# Enable IMCP echo requests -- allows ping command to reach this OS.
+# Enable ICMP echo requests -- allows ping command to reach this OS.
 Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv4-In)"
 Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv6-In)"
 
