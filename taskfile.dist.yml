@@ -37,9 +37,7 @@ tasks:
       INVENTORY: '{{.INVENTORY | default "hosts.ini"}}'
     dir: "{{.ROOT_DIR}}"
     cmds:
-      - cmd: >-
-          ansible-playbook ansi_colle.windows.site
-          --inventory {{.INVENTORY}} --tags {{.TAGS}}
+      - cmd: ansible-playbook ansi_colle.windows.site
 
   build:docs:
     desc: Install current repo locally and create documentation using `antsibull-docs`.
