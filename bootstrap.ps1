@@ -8,7 +8,7 @@
     Otherwise it will allow ICMP echo requests by default.
 #>
 param(
-    [switch] NoEcho = $False
+    [switch] $NoEcho
 )
 
 # Check for Administrator privilege
