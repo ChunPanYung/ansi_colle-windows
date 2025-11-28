@@ -40,8 +40,6 @@ function Set-SSH {
     New-Item -Force -ItemType "directory" -Path "$nev:USERPROFILE\.ssh"
     # Create authorized_keys file for user account
     New-Item -Force -ItemType "file" -Path "$env:USERPROFILE\.ssh\authorized_keys"
-    # Create .ssh directory on user profile
-    New-Item -Force -ItemType Directory -Path $env:USERPROFILE\.ssh
 
     # Enable key based authorization on ssh
     [string]$GlobalSSH = "$env:ProgramData\ssh\sshd_config"
