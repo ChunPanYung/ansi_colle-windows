@@ -17,3 +17,8 @@
         name: 'AppsUseLightTheme' }
     - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
         name: 'SystemUsesLightTheme' }
+
+- name: Install PowerShell
+  ansi_colle.mods.winget_cmd:
+    id: Microsoft.PowerShell
+
