@@ -35,6 +35,7 @@ tasks:
     vars:
       TAGS: '{{index .MATCH 0 | default "all"}}'
       INVENTORY: '{{.INVENTORY | default "hosts.ini"}}'
+    dir: "{{.ROOT_DIR}}"
     cmds:
       - cmd: >-
           ansible-playbook ansi_colle.windows.site --ask-become-pass
