@@ -22,3 +22,8 @@
 - name: Install PowerShell
   ansi_colle.mods.winget_cmd:
     id: Microsoft.PowerShell
+
+- name: Install Scoop
+  ansible.windows.win_powershell:
+    script: |
+      Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
