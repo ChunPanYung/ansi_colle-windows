@@ -11,6 +11,7 @@
   ansible.windows.win_regedit:
     path: "{{ item.path }}"
     name: "{{ item.name }}"
+    type: dword
     data: 0
   loop:
     - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
