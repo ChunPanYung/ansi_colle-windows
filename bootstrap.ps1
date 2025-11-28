@@ -1,6 +1,4 @@
-# Enable printing CLI as it runs
-Set-PSDebug -Trace 1
-
+# Check for Administrator privilege
 $IsAdmin = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
 if (-not $IsAdmin) {
