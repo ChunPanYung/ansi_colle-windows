@@ -24,3 +24,11 @@ ansible_become_method=runas
 
 First, ensure Windows can execute PowerShell script:
 `Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope CurrentUser`
+
+
+## Initialize virtual environment
+
+This project use `uv` for Virtual Environment setup.
+
+`uv sync`: Init and sync project's environment according to `pyproject.toml` file.
+`source .venv/bin/activate`: Activate bash venv.

@@ -17,3 +17,7 @@ __pycache__
 .venv
 .pytest_cache
 poetry.lock
+
+# uv pyhton venv
+uv.lock
+.lock

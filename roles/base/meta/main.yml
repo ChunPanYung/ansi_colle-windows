@@ -1,0 +1,13 @@
+---
+#SPDX-License-Identifier: MIT-0
+galaxy_info:
+  author: Chun Pan Yung
+  description: Base configurations for Windows.
+
+  license: MIT
+
+  min_ansible_version: "2.19"
+
+  galaxy_tags: []
+
+dependencies: []

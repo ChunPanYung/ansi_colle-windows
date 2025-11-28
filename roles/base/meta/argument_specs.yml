@@ -1,0 +1,9 @@
+---
+argument_specs:
+  main:
+    short_description: Base configurations for Windows.
+    description:
+      - Main entry point for base role.
+    author:
+      - Chun Pan Yung
+    options: {}

@@ -1,0 +1,12 @@
+---
+# tasks file for base
+- name: Enable Dark Mode
+  ansible.windows.win_regedit:
+    path: "{{ item.path }}"
+    name: "{{ item.name }}"
+    data: 0
+  loop:
+    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
+        name: 'AppsUseLightTheme' }
+    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
+        name: 'SystemUsesLightTheme' }
