@@ -6,7 +6,7 @@ TODO.md
 .plugin-cache.yaml
 .self
 
-hosts
+hosts*
 env-vars.yml
 
 # antsibull-changelog
