@@ -38,7 +38,7 @@ tasks:
     dir: "{{.ROOT_DIR}}"
     cmds:
       - cmd: >-
-          ansible-playbook ansi_colle.windows.site --ask-become-pass
+          ansible-playbook ansi_colle.windows.site
           --inventory {{.INVENTORY}} --tags {{.TAGS}}
 
   build:docs:
