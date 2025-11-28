@@ -3,7 +3,7 @@
 # See https://pre-commit.com/hooks.html for more hooks
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v6.0.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -13,3 +13,12 @@ repos:
       - id: no-commit-to-branch
       - id: mixed-line-ending
       - id: trailing-whitespace
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v25.11.1
+    hooks:
+      - id: ansible-lint
+  - repo: https://github.com/abravalheri/validate-pyproject
+    rev: v0.24.1
+    hooks:
+      - id: validate-pyproject
+        additional_dependencies: ["validate-pyproject-schema-store[all]"]
