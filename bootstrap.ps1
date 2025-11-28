@@ -80,6 +80,9 @@ Set-SSH
 Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv4-In)"
 Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv6-In)"
 
+# Set current Network Profile to Private so that SSH and ICMP rules work properly
+Get-NetConnectionProfile | Set-NetConnectionProfile -NetworkCategory "Private"
+
 # Set the default shell to be PowerShell
 $NewItemPropertyParams = @{
     Path         = "HKLM:\SOFTWARE\OpenSSH"
