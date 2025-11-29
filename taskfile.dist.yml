@@ -34,10 +34,9 @@ tasks:
     desc: Build and run working directory, then execute this branch with tags specified.
     vars:
       TAGS: '{{index .MATCH 0 | default "all"}}'
-      INVENTORY: '{{.INVENTORY | default "hosts.ini"}}'
     dir: "{{.ROOT_DIR}}"
     cmds:
-      - cmd: ansible-playbook ansi_colle.windows.site
+      - cmd: ansible-playbook ansi_colle.windows.site --tags {{.TAGS}}
 
   build:docs:
     desc: Install current repo locally and create documentation using `antsibull-docs`.
