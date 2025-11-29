@@ -19,11 +19,23 @@
     - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
         name: 'SystemUsesLightTheme' }
 
-- name: Install PowerShell
+- name: Install PowerShell & Firefox
   ansi_colle.mods.winget_cmd:
-    id: Microsoft.PowerShell
+    id: "{{ item }}"
+  loop:
+    - Microsoft.PowerShell
+    - Mozilla.Firefox
 
-- name: Install Scoop
-  ansible.windows.win_powershell:
-    script: |
-      Invoke-RestMethod -Uri https://get.scoop.sh | Invoke-Expression
+- name: Show file extensions in Windows Explorer
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'HideFileExt'
+    type: dword
+    data: 0
+
+- name: Show hidden files in Windows Explorer
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'Hidden'
+    type: dword
+    data: 1
