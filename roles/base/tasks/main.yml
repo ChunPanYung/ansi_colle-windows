@@ -49,5 +49,5 @@
 
 - name: Remove unused packages
   ansible.windows.win_package:
-    name: Microsoft.MicrosoftSolitaireCollection
+    product_id: Microsoft.MicrosoftSolitaireCollection
     state: absent
