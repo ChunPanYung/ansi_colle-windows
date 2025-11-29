@@ -5,6 +5,7 @@ TODO.md
 .directory
 .plugin-cache.yaml
 .self
+.ansible/
 
 hosts*
 env-vars.yml
