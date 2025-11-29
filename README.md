@@ -36,10 +36,10 @@ For more information how to setup, Execute/look at `Setup-SSH.ps1` in this direc
         git+https://github.com/ChunPanYung/ansi_colle-windows.git
 
     # Run this to update every time
-    ansible-playbook ansi_colle.linux.install
+    ansible-playbook ansi_colle.windows.install
 
     # Run this after update, it will ask you sudo password
-    ansible-playbook ansi_colle.linux.site --connection=local \
+    ansible-playbook ansi_colle.windows.site --connection=local \
         --inventory 127.0.0.1, --ask-become-pass --verbose
     ```
 

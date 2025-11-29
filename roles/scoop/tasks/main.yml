@@ -11,17 +11,20 @@
   community.windows.win_scoop:
     name: git  # Required by scoop to update packages
 
-- name: Install programming languages
+- name: Install dev packages
+  when: dev_app
   community.windows.win_scoop:
-    name: python
+    name:
+      - python
+      - gnupg
+      - oh-my-posh
+      - restic
 
-- name: Install packages from extras bucket
+- name: Install GUI packages
+  when: gui_app
   community.windows.win_scoop:
     name:
       - 7zip
-      - kopia
       - keepassxc
       - nextcloud
       - qownnotes
-
-# TODO: Steam, powershell, nextcloud

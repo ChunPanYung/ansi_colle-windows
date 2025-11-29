@@ -1,4 +1,0 @@
----
-bugfixes:
-  - Fix ansible become method.
-  - Setup proper prvilege for scoop installation.

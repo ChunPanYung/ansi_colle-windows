@@ -1,2 +1,2 @@
 ---
-windows_home_folder: "/mnt/c/Users/{{ win_user }}"
+wsl_home_folder: "/mnt/c/Users/{{ win_user }}"

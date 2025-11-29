@@ -5,6 +5,7 @@ TODO.md
 .directory
 .plugin-cache.yaml
 .self
+.ansible/
 
 hosts*
 env-vars.yml
@@ -16,7 +17,6 @@ env-vars.yml
 __pycache__
 .venv
 .pytest_cache
-poetry.lock
 dist/
 
 # uv pyhton venv

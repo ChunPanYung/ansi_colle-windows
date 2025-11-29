@@ -1,0 +1,22 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for the scoop role
+    description:
+      - This is the main entrypoint for the C(scoop) role.
+      - This role will first validate that you have scoop installed.
+    author:
+      - Chun Pan Yung
+    options:
+      gui_app:
+        type: "bool"
+        required: false
+        default: false
+        description:
+          - Install GUI apps for general use case.
+      dev_apps:
+        type: "bool"
+        required: false
+        default: false
+        description:
+          - Install dev apps for developer use case.

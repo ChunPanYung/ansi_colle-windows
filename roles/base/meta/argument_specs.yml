@@ -6,4 +6,10 @@ argument_specs:
       - Main entry point for base role.
     author:
       - Chun Pan Yung
-    options: {}
+    options:
+      single_click:
+        type: "bool"
+        required: false
+        default: false
+        description:
+          - Configure windows to use single click to open folders and files.
