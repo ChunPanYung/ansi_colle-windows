@@ -1,10 +1,17 @@
 ---
-- name: Install Visual Studio Code
+- name: Enable WSL for containerization
+  ansible.windows.win_feature:
+    name: Microsoft-Windows-Subsystem-Linux
+    include_sub_features: true
+
+
+- name: Install Developer Apps
   ansi_colle.mods.winget_cmd:
     id: "{{ item }}"
   loop:
     - Microsoft.VisualStudioCode
     - Docker.DockerDesktop
+
 
 - name: Create a directory for CLI binaries path
   vars:
