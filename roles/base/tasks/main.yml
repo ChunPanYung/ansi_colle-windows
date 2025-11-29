@@ -41,6 +41,7 @@
     data: 1
 
 - name: Single Click to Open Items in Windows Explorer
+  when: single_click
   ansible.windows.win_regedit:
     path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer'
     name: 'ShellState'

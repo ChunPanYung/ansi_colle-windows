@@ -15,4 +15,6 @@
     - role: ansi_colle.windows.winget
       tags: winget
     - role: ansi_colle.windows.base
+      vars:
+        single_click: true
       tags: base
