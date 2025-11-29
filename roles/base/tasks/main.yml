@@ -55,3 +55,5 @@
   loop:
     - MSTeams
     - Microsoft.MicrosoftSolitaireCollection
+    - Microsoft.Paint
+    - Microsoft.WindowsCamera
