@@ -19,6 +19,9 @@
       - gnupg
       - oh-my-posh
       - restic
+      - CascadiaCode-NF
+      - CascadiaMono-NF
+
 
 - name: Install GUI packages
   when: gui_app
