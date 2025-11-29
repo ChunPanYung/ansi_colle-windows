@@ -17,7 +17,7 @@ tasks:
           sed --in-place --regexp-extended 's/version:.*/version: "{{.TAG}}"/'
           {{.ROOT_DIR}}/galaxy.yml
       - cmd: >-
-          git-cliff --prepend CHANGELOG.md --unreleased --tag v{{.TAG}}
+          uv run git-cliff --prepend CHANGELOG.md --unreleased --tag v{{.TAG}}
 
   install:*:
     desc: |

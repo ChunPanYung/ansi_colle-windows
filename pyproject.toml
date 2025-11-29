@@ -1,6 +1,6 @@
 [project]
 name = "ansi_colle-windows"
-version = "1.4.0"
+version = "1.0.0"
 
 description = "Namespace that stores Ansible collections."
 readme = "README.md"
@@ -17,4 +17,5 @@ dev = [
   "pre-commit>=4.3.0",
   "ruff>=0.13.1",
   "validate-pyproject>=0.24.1",
+  "git-cliff"
 ]
