@@ -1,3 +1,7 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
 ## [1.0.0] - 2025-11-29
 
 ### 🚀 Features
@@ -20,7 +24,8 @@
 
 ### 🚜 Refactor
 
-- Use function for install and configure ssh, network profile setting and enable echo request. (#3)
+- Use function for install and configure ssh.
+- Use function for network profile setting and enable echo request. (#3)
 - Put UTC task into base role.
 - [**breaking**] Set inventory and tag with environment variable instead.
 

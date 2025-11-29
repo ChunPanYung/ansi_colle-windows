@@ -6,8 +6,6 @@
       prompt: "BECOME password"
 
   roles:
-    - role: ansi_colle.windows.home
-      tags: home
     - role: ansi_colle.windows.scoop
       tags: scoop
     - role: ansi_colle.windows.dev

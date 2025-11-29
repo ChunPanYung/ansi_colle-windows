@@ -7,14 +7,14 @@
     mode: '0755'
   loop:
     - {
-      src: "{{ windows_home_folder }}/Repos",
+      src: "{{ wsl_home_folder }}/Repos",
       dest: "{{ ansible_user_dir }}/Repos"
     }
     - {
-      src: "{{ windows_home_folder }}/Appdata/Local/gnupg",
+      src: "{{ wsl_home_folder }}/Appdata/Local/gnupg",
       dest: "{{ ansible_user_dir }}/.gnupg"
     }
     - {
-      src: "{{ windows_home_folder }}/.ssh",
+      src: "{{ wsl_home_folder }}/.ssh",
       dest: "{{ ansible_user_dir }}/.ssh"
     }

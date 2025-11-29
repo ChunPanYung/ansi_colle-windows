@@ -33,4 +33,3 @@
       ansible.windows.win_copy:
         src: profile.ps1
         dest: "{{ dev_pwsh_path }}\\profile.ps1"
-
