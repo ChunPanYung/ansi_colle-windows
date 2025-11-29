@@ -4,18 +4,19 @@ version = "1.0.0"
 
 description = "Namespace that stores Ansible collections."
 readme = "README.md"
-requires-python = ">=3.13"
+
+# pre-commit requires 3.13 version
+requires-python = ">=3.13, <3.14"
 
 dependencies = ["ansible>=12.0.0"]
 
 [dependency-groups]
 dev = [
-  "ansible-dev-tools>=25.8.3",
-  "antsibull-docs>=2.21.0",
-  "git-cliff>=2.10.0",
-  "go-task-bin>=3.45.4",
-  "pre-commit>=4.3.0",
-  "ruff>=0.13.1",
-  "validate-pyproject>=0.24.1",
-  "git-cliff"
+  "ansible-dev-tools",
+  "antsibull-docs>=2.21",
+  "git-cliff>=2.10",
+  "go-task-bin>=3.45",
+  "pre-commit>=4.3",
+  "ruff>=0.13",
+  "validate-pyproject>=0.24",
 ]
