@@ -1,16 +1,8 @@
 ---
-# tasks file for dev
 - name: Install Visual Studio Code
-  become: false
-  ansible.windows.win_command: winget install --Id Microsoft.VisualStudioCode
-  register: dev_cmd
-  failed_when: "'No package found' in dev_cmd.stdout"
-  changed_when: "'Successfully installed' in dev_cmd.stdout"
+  ansi_colle.mods.winget_cmd:
+    id: "{{ item }}"
+  loop:
+    - Microsoft.VisualStudioCode
+    - Docker.DockerDesktop
 
-- name: Install Docker Desktop
-  become: true
-  ansible.windows.win_command: winget install --Id Docker.DockerDesktop
-  register: dev_cmd
-  failed_when: "'No package found' in dev_cmd.stdout or
-    'Installer hash does not match'"
-  changed_when: "'Successfully installed' in dev_cmd.stdout"
