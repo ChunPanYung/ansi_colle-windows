@@ -10,8 +10,6 @@
       tags: scoop
     - role: ansi_colle.windows.dev
       tags: dev
-    - role: ansi_colle.windows.winget
-      tags: winget
     - role: ansi_colle.windows.base
       vars:
         single_click: true
