@@ -1,2 +1,0 @@
----
-home_pwsh_dir: "{{ ansible_user_dir }}\\Documents\\PowerShell"

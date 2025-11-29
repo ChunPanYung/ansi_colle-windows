@@ -1,0 +1,10 @@
+---
+argument_specs:
+  main:
+    short_description: Main entry point for the scoop role
+    description:
+      - This is the main entrypoint for the C(scoop) role.
+      - This role will first validate that you have scoop installed.
+    author:
+      - Chun Pan Yung
+    options: {}
