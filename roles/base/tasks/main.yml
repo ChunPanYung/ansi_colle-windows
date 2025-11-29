@@ -39,3 +39,10 @@
     name: 'Hidden'
     type: dword
     data: 1
+
+- name: Single Click to Open Items in Windows Explorer
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer'
+    name: 'ShellState'
+    type: binary
+    data: 240000001ea8000000000000000000000000000001000000130000000000000062000000
