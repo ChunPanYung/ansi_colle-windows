@@ -46,3 +46,10 @@
     name: 'TaskbarAl'
     type: dword
     data: 0
+
+- name: Change search bar to icon only
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Search'
+    name: 'SearchboxTaskbarMode'
+    type: dword
+    data: 1
