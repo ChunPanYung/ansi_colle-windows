@@ -26,11 +26,6 @@
     - Microsoft.PowerShell
     - Mozilla.Firefox
 
-- name: Create folder for PowerShell settings
-  ansible.windows.win_file:
-    path: "{{ ansible_user_dir }}\\Documents\\PowerShell"
-    state: directory
-
 - name: Show file extensions in Windows Explorer
   ansible.windows.win_regedit:
     path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
