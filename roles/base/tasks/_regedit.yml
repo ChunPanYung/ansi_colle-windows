@@ -1,0 +1,48 @@
+---
+- name: Enable UTC time in Windows
+  ansible.windows.win_regedit:
+    path: HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
+    name: RealTimeIsUniversal
+    data: 1
+    type: dword
+
+- name: Enable Dark Mode
+  ansible.windows.win_regedit:
+    path: "{{ item.path }}"
+    name: "{{ item.name }}"
+    type: dword
+    data: 0
+  loop:
+    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
+        name: 'AppsUseLightTheme' }
+    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
+        name: 'SystemUsesLightTheme' }
+
+- name: Show file extensions in Windows Explorer
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'HideFileExt'
+    type: dword
+    data: 0
+
+- name: Show hidden files in Windows Explorer
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'Hidden'
+    type: dword
+    data: 1
+
+- name: Single Click to Open Items in Windows Explorer
+  when: single_click
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer'
+    name: 'ShellState'
+    type: binary
+    data: 240000001ea8000000000000000000000000000001000000130000000000000062000000
+
+- name: Align Start menu to left
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'TaskbarAl'
+    type: dword
+    data: 0
