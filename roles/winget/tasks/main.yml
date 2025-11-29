@@ -1,6 +1,0 @@
----
-# tasks file for winget
-- name: Install Steam
-  become: true
-  ansi_colle.mods.winget_cmd:
-    id: Valve.Steam
