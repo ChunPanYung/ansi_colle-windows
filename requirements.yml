@@ -1,0 +1,11 @@
+---
+# Required by GitHub Action to install additional collection and roles.
+collections:
+  - name: ansible.windows
+    version: "*"
+  - name: community.windows
+    version: "*"
+
+  - name: https://github.com/ChunPanYung/ansi_colle-mods.git
+    type: git
+    version: main

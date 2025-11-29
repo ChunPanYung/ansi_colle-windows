@@ -1,3 +1,16 @@
+<#
+.SYNOPSIS
+    Setup and configure SSH on Windows OS.
+.DESCRIPTION
+    Setup and configure OpenSSH on Windows OS.
+.PARAMETER NoEcho
+    Do not allow or setup ICMP echo requests on Firewall.
+    Otherwise it will allow ICMP echo requests by default.
+#>
+param(
+    [switch] $NoEcho
+)
+
 # Check for Administrator privilege
 $IsAdmin = (New-Object Security.Principal.WindowsPrincipal([Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 
@@ -35,9 +48,11 @@ function Install-SSH {
 
 function Set-SSH {
     # Create .ssh directory for user account
-    New-Item -Force -ItemType "directory" -Path "$nev:USERPROFILE\.ssh"
+    New-Item -Force -ItemType "directory" -Path "$env:USERPROFILE\.ssh"
     # Create authorized_keys file for user account
-    New-Item -Force -ItemType "file" -Path "$env:USERPROFILE\.ssh\authorized_keys"
+    if (!(Test-Path "$env:USERPROFILE\.ssh\authorized_keys")) {
+        New-Item -ItemType "file" -Path "$env:USERPROFILE\.ssh\authorized_keys"
+    }
 
     # Enable key based authorization on ssh
     [string]$GlobalSSH = "$env:ProgramData\ssh\sshd_config"
@@ -49,7 +64,7 @@ function Set-SSH {
     if (-not (Test-Path -PathType leaf -Path $GlobalAuthorizedKeys)) {
         New-Item -ItemType "file" -Path $GlobalAuthorizedKeys
     }
-    # Grand permission to $GlobalAuthorizedKeys file
+    # Grant permission to $GlobalAuthorizedKeys file
     icacls.exe $GlobalAuthorizedKeys /inheritance:r /grant "Administrators:F" /grant "SYSTEM:F"
 
     # Confirm the Firewall rule is configured. It should be created automatically by setup. Run the following to verify
@@ -75,8 +90,10 @@ Install-SSH
 Set-SSH
 
 # Enable ICMP echo requests -- allows ping command to reach this OS.
-Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv4-In)"
-Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv6-In)"
+if (-not $NoEcho) {
+    Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv4-In)"
+    Enable-NetFirewallRule -displayName "File and Printer Sharing (Echo Request - ICMPv6-In)"
+}
 
 # Set current Network Profile to Private so that SSH and ICMP rules work properly
 Get-NetConnectionProfile | Set-NetConnectionProfile -NetworkCategory "Private"

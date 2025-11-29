@@ -6,7 +6,7 @@ TODO.md
 .plugin-cache.yaml
 .self
 
-hosts
+hosts*
 env-vars.yml
 
 # antsibull-changelog
@@ -17,3 +17,8 @@ __pycache__
 .venv
 .pytest_cache
 poetry.lock
+dist/
+
+# uv pyhton venv
+uv.lock
+.lock
