@@ -46,3 +46,8 @@
     name: 'ShellState'
     type: binary
     data: 240000001ea8000000000000000000000000000001000000130000000000000062000000
+
+- name: Remove unused packages
+  ansible.windows.win_package:
+    name: Microsoft.MicrosoftSolitaireCollection
+    state: absent
