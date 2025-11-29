@@ -4,11 +4,3 @@
   become: true
   ansi_colle.mods.winget_cmd:
     id: Valve.Steam
-
-- name: Install Visual Studio Code
-  ansi_colle.mods.winget_cmd:
-    id: Microsoft.VisualStudioCode
-
-- name: Install Mozilla Firefox
-  ansi_colle.mods.winget_cmd:
-    id: Mozilla.Firefox
