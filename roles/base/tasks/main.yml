@@ -49,5 +49,8 @@
 
 - name: Remove unused packages
   ansible.windows.win_package:
-    product_id: Microsoft.MicrosoftSolitaireCollection
+    product_id: "{{ item }}"
     state: absent
+  loop:
+    - MSTeams
+    - Microsoft.MicrosoftSolitaireCollection
