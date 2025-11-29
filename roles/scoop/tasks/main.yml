@@ -12,6 +12,7 @@
     name: git  # Required by scoop to update packages
 
 - name: Install dev packages
+  when: dev_app
   community.windows.win_scoop:
     name:
       - python
@@ -20,6 +21,7 @@
       - restic
 
 - name: Install GUI packages
+  when: gui_app
   community.windows.win_scoop:
     name:
       - 7zip
