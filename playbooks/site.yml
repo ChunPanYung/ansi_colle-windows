@@ -10,8 +10,8 @@
       tags: home
     - role: ansi_colle.windows.scoop
       tags: scoop
-    - role: ansi_colle.windows.install
-      tags: install
+    - role: ansi_colle.windows.dev
+      tags: dev
     - role: ansi_colle.windows.winget
       tags: winget
     - role: ansi_colle.windows.base
