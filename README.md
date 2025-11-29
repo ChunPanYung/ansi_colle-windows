@@ -28,22 +28,23 @@ For more information how to setup, Execute/look at `Setup-SSH.ps1` in this direc
 
 4. Run the following command:
 
-```bash
-export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml
-export ANSIBLE_INVENTORY=hosts.ini  # inventory file path
+    ```bash
+    export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml
+    export ANSIBLE_INVENTORY=hosts.ini  # inventory file path
 
-ansible-galaxy collection install \
-  git+https://github.com/ChunPanYung/ansi_colle-linux.git
+    ansible-galaxy collection install \
+        git+https://github.com/ChunPanYung/ansi_colle-linux.git
 
-# Run this to update every time
-ansible-playbook ansi_colle.linux.install
+    # Run this to update every time
+    ansible-playbook ansi_colle.linux.install
 
-# Run this after update, it will ask you sudo password
-ansible-playbook ansi_colle.linux.site --connection=local \
-  --inventory 127.0.0.1, --ask-become-pass --verbose
-```
+    # Run this after update, it will ask you sudo password
+    ansible-playbook ansi_colle.linux.site --connection=local \
+        --inventory 127.0.0.1, --ask-become-pass --verbose
+    ```
 
-_**Optional**_
+**Optional**
+
 Here are variables to define before running
 
 ```bash
