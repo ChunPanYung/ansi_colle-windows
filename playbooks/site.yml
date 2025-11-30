@@ -5,6 +5,15 @@
     - name: ansible_become_pass
       prompt: "BECOME password"
 
+  tasks:
+    - name: Check Administrator Accoess
+      become: true
+      ansible.windows.win_powershell:
+        script: |
+          (New-Object Security.Principal.WindowsPrincipal(
+            [Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole(
+            [Security.Principal.WindowsBuiltInRole]::Administrator)
+
   roles:
     - role: ansi_colle.windows.base
       vars:
