@@ -22,7 +22,6 @@
       - CascadiaCode-NF
       - CascadiaMono-NF
 
-
 - name: Install GUI packages
   when: gui_app
   community.windows.win_scoop:
