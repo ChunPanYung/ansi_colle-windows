@@ -8,6 +8,7 @@
   tasks:
     - name: Check Administrator Accoess
       become: true
+      tags: always
       ansible.windows.win_powershell:
         script: |
           (New-Object Security.Principal.WindowsPrincipal(
