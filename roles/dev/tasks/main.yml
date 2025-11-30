@@ -4,14 +4,12 @@
     name: Microsoft-Windows-Subsystem-Linux
     include_sub_features: true
 
-
 - name: Install Developer Apps
   ansi_colle.mods.winget_cmd:
     id: "{{ item }}"
   loop:
     - Microsoft.VisualStudioCode
     - Docker.DockerDesktop
-
 
 - name: Create a directory for CLI binaries path
   vars:
@@ -39,4 +37,4 @@
     - name: Copy profile.ps1
       ansible.windows.win_copy:
         src: profile.ps1
-        dest: "{{ dev_pwsh_path }}\\profile.ps1"
+        dest: "{{ dev_pwsh_path }}\\Microsoft.PowerShell_profile.ps1"
