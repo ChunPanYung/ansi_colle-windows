@@ -13,6 +13,10 @@
     - Microsoft.MicrosoftSolitaireCollection
     - Microsoft.Paint
     - Microsoft.WindowsCamera
+    - Microsoft.OutlookForWindows
+    - Microsoft.WindowsFeedbackHub
+    - MicrosoftCorporationII.QuickAssist
+    - Microsoft.WindowsSoundRecorder
 
 - name: Install Firefox, cannot change default browser due to Microsoft Policy
   when: base_firefox
