@@ -8,13 +8,13 @@ argument_specs:
     author:
       - Chun Pan Yung
     options:
-      gui_app:
+      scoop_gui_apps:
         type: "bool"
         required: false
         default: false
         description:
           - Install GUI apps for general use case.
-      dev_apps:
+      scoop_dev_apps:
         type: "bool"
         required: false
         default: false

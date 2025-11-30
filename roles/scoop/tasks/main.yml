@@ -12,7 +12,7 @@
     name: git  # Required by scoop to update packages
 
 - name: Install dev packages
-  when: dev_app
+  when: scoop_dev_apps
   community.windows.win_scoop:
     name:
       - python
@@ -23,7 +23,7 @@
       - CascadiaMono-NF
 
 - name: Install GUI packages
-  when: gui_app
+  when: scoop_gui_apps
   community.windows.win_scoop:
     name:
       - 7zip
