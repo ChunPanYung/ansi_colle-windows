@@ -12,5 +12,9 @@
       tags: base
     - role: ansi_colle.windows.scoop
       tags: scoop
+      vars:
+        scoop_dev_apps: true
+        scoop_gui_apps: true
     - role: ansi_colle.windows.dev
       tags: dev
+
