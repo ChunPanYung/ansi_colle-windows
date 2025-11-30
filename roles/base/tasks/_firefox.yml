@@ -5,6 +5,7 @@
 
 - name: Set Firefox as default web browser
   ansible.windows.win_regedit:
+    become: true
     path: "{{ item }}"
     name: ProgId
     data: FirefoxURL
