@@ -7,9 +7,8 @@
   ansible.windows.win_regedit:
     path: "{{ item }}"
     name: ProgId
-    # type: string
-    # data: FirefoxURL
-    data: MSEdgeHTM
+    data: FirefoxURL
+    # data: MSEdgeHTM
   loop:
-    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice'
-    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice'
+    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoiceLatest'
+    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoiceLatest'
