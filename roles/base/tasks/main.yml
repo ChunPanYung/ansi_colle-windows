@@ -1,11 +1,8 @@
 ---
 # tasks file for base
-- name: Install PowerShell & Firefox
+- name: Install PowerShell
   ansi_colle.mods.winget_cmd:
-    id: "{{ item }}"
-  loop:
-    - Microsoft.PowerShell
-    - Mozilla.Firefox
+    id: Microsoft.PowerShell
 
 - name: Remove unused packages
   ansible.windows.win_package:
@@ -16,6 +13,11 @@
     - Microsoft.MicrosoftSolitaireCollection
     - Microsoft.Paint
     - Microsoft.WindowsCamera
+
+- name: Install and configure firefox
+  when: base_firefox
+  ansible.builtin.include_tasks:
+    file: _firefox.yml
 
 - name: Change Windows configuration by registry
   ansible.builtin.include_tasks:

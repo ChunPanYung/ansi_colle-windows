@@ -13,3 +13,9 @@ argument_specs:
         default: false
         description:
           - Configure windows to use single click to open folders and files.
+      base_firefox:
+        type: "bool"
+        required: false
+        default: true
+        description:
+          - Install firefox and set it as default.

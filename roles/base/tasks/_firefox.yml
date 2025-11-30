@@ -1,0 +1,14 @@
+---
+- name: Install Firefox
+  ansi_colle.mods.winget_cmd:
+    id: Mozilla.Firefox
+
+- name: Show hidden files in Windows Explorer
+  ansible.windows.win_regedit:
+    path: "{{ item }}"
+    name: 'ProgId'
+    type: string
+    data: FirefoxURL
+  loop:
+    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice'
+    - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice'
