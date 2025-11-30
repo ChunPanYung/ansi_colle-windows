@@ -1,5 +1,6 @@
 ---
-- name: Enable WSL for containerization
+- name: Enable WSL for containerization on non-server Windows
+  when: "'server' not in (ansible_os_name | lower)"
   ansible.windows.win_optional_feature:
     name: Microsoft-Windows-Subsystem-Linux
   register: dev_wsl_status
