@@ -2,7 +2,11 @@
 - name: Enable WSL for containerization
   ansible.windows.win_optional_feature:
     name: Microsoft-Windows-Subsystem-Linux
-    include_sub_features: true
+  register: dev_wsl_status
+
+- name: Reboot if WSL requires it
+  ansible.windows.win_reboot:
+  when: dev_wsl_status.reboot_required
 
 - name: Install Developer Apps
   ansi_colle.mods.winget_cmd:
