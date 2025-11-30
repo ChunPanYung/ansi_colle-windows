@@ -12,7 +12,6 @@
         [Security.Principal.WindowsBuiltInRole]::Administrator)
 
 - name: Set Firefox as default web browser
-  become: true
   ansible.windows.win_regedit:
     path: "{{ item }}"
     name: ProgId
