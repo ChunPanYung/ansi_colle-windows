@@ -8,7 +8,8 @@
     path: "{{ item }}"
     name: ProgId
     # type: string
-    data: FirefoxURL
+    # data: FirefoxURL
+    data: MSEdgeHTM
   loop:
     - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice'
     - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\https\UserChoice'
