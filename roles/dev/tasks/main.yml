@@ -1,6 +1,6 @@
 ---
 - name: Enable WSL for containerization
-  ansible.windows.win_feature:
+  ansible.windows.win_optional_feature:
     name: Microsoft-Windows-Subsystem-Linux
     include_sub_features: true
 
