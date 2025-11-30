@@ -3,6 +3,15 @@
   ansi_colle.mods.winget_cmd:
     id: Mozilla.Firefox
 
+- name: Check Administrator Accoess
+  become: true
+  tags: always
+  ansible.windows.win_powershell:
+    script: |
+      (New-Object Security.Principal.WindowsPrincipal(
+        [Security.Principal.WindowsIdentity]::GetCurrent())).IsInRole(
+        [Security.Principal.WindowsBuiltInRole]::Administrator)
+
 - name: Set Firefox as default web browser
   ansible.windows.win_regedit:
     become: true
