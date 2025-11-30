@@ -4,11 +4,10 @@
     id: Mozilla.Firefox
 
 - name: Set Firefox as default web browser
-  become: true
   ansible.windows.win_regedit:
     path: "{{ item }}"
-    name: 'ProgId'
-    type: string
+    name: ProgId
+    # type: string
     data: FirefoxURL
   loop:
     - 'HKCU:\Software\Microsoft\Windows\Shell\Associations\UrlAssociations\http\UserChoice'
