@@ -7,9 +7,15 @@ argument_specs:
     author:
       - Chun Pan Yung
     options:
-      single_click:
+      base_single_click:
         type: "bool"
         required: false
         default: false
         description:
           - Configure windows to use single click to open folders and files.
+      base_firefox:
+        type: "bool"
+        required: false
+        default: true
+        description:
+          - Install firefox and set it as default.

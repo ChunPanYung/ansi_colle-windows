@@ -6,25 +6,28 @@
   loop:
     - main
     - extras
+    - nerd-fonts
 
 - name: Install required packages
   community.windows.win_scoop:
     name: git  # Required by scoop to update packages
 
 - name: Install dev packages
-  when: dev_app
+  when: scoop_dev_apps
   community.windows.win_scoop:
     name:
-      - python
-      - gnupg
-      - oh-my-posh
-      - restic
+      - main/python
+      - main/gnupg
+      - main/oh-my-posh
+      - main/restic
+      - nerd-fonts/CascadiaCode-NF
+      - nerd-fonts/CascadiaMono-NF
 
 - name: Install GUI packages
-  when: gui_app
+  when: scoop_gui_apps
   community.windows.win_scoop:
     name:
-      - 7zip
-      - keepassxc
-      - nextcloud
-      - qownnotes
+      - main/7zip
+      - extras/keepassxc
+      - extras/nextcloud
+      - extras/qownnotes

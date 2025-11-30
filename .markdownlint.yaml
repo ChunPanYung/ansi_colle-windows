@@ -1,0 +1,6 @@
+---
+# allow duplicate heading on siblings.
+MD024:
+  siblings_only: true
+MD013:
+  line_length: 120

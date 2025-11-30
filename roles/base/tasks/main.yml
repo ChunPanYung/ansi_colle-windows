@@ -1,52 +1,8 @@
 ---
 # tasks file for base
-- name: Enable UTC time in Windows
-  ansible.windows.win_regedit:
-    path: HKLM:\SYSTEM\CurrentControlSet\Control\TimeZoneInformation
-    name: RealTimeIsUniversal
-    data: 1
-    type: dword
-
-- name: Enable Dark Mode
-  ansible.windows.win_regedit:
-    path: "{{ item.path }}"
-    name: "{{ item.name }}"
-    type: dword
-    data: 0
-  loop:
-    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
-        name: 'AppsUseLightTheme' }
-    - { path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize',
-        name: 'SystemUsesLightTheme' }
-
-- name: Install PowerShell & Firefox
+- name: Install PowerShell
   ansi_colle.mods.winget_cmd:
-    id: "{{ item }}"
-  loop:
-    - Microsoft.PowerShell
-    - Mozilla.Firefox
-
-- name: Show file extensions in Windows Explorer
-  ansible.windows.win_regedit:
-    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
-    name: 'HideFileExt'
-    type: dword
-    data: 0
-
-- name: Show hidden files in Windows Explorer
-  ansible.windows.win_regedit:
-    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
-    name: 'Hidden'
-    type: dword
-    data: 1
-
-- name: Single Click to Open Items in Windows Explorer
-  when: single_click
-  ansible.windows.win_regedit:
-    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer'
-    name: 'ShellState'
-    type: binary
-    data: 240000001ea8000000000000000000000000000001000000130000000000000062000000
+    id: Microsoft.PowerShell
 
 - name: Remove unused packages
   ansible.windows.win_package:
@@ -55,3 +11,14 @@
   loop:
     - MSTeams
     - Microsoft.MicrosoftSolitaireCollection
+    - Microsoft.Paint
+    - Microsoft.WindowsCamera
+
+- name: Install Firefox, cannot change default browser due to Microsoft Policy
+  when: base_firefox
+  ansi_colle.mods.winget_cmd:
+    id: Mozilla.Firefox
+
+- name: Change Windows configuration by registry
+  ansible.builtin.include_tasks:
+    file: _regedit.yml

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.1.0] - 2025-11-30
+
+### 🚀 Features
+
+- [**breaking**] Remove unused roles.
+- Install nerdfont.
+- Enable wsl.
+- Change to search icon and label.
+- Nerd-fonts repo and specify package source.
+
+### 🐛 Bug Fixes
+
+- `ansible-lint` error.
+
+### 🎨 Styling
+
+- Re-arrange role on `site.yml` file.
+- Append role name to role var.
+
 ## [1.0.0] - 2025-11-29
 
 ### 🚀 Features
