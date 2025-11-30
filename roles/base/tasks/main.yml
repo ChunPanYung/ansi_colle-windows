@@ -14,10 +14,10 @@
     - Microsoft.Paint
     - Microsoft.WindowsCamera
 
-- name: Install and configure firefox
+- name: Install Firefox
   when: base_firefox
-  ansible.builtin.include_tasks:
-    file: _firefox.yml
+  ansi_colle.mods.winget_cmd:
+    id: Mozilla.Firefox  # Note: cannot change default browser with ansible.
 
 - name: Change Windows configuration by registry
   ansible.builtin.include_tasks:
