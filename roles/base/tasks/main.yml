@@ -14,10 +14,10 @@
     - Microsoft.Paint
     - Microsoft.WindowsCamera
 
-- name: Install Firefox
+- name: Install Firefox, cannot change default browser due to Microsoft Policy
   when: base_firefox
   ansi_colle.mods.winget_cmd:
-    id: Mozilla.Firefox  # Note: cannot change default browser with ansible.
+    id: Mozilla.Firefox
 
 - name: Change Windows configuration by registry
   ansible.builtin.include_tasks:
