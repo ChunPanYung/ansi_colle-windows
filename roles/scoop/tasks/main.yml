@@ -8,9 +8,9 @@
     - extras
     - nerd-fonts
 
-- name: Install required packages
+- name: Install required packages by scoop to update packages
   community.windows.win_scoop:
-    name: git  # Required by scoop to update packages
+    name: main/git
 
 - name: Install dev packages
   when: scoop_dev_apps
@@ -19,7 +19,8 @@
       - main/python
       - main/gnupg
       - main/oh-my-posh
-      - main/restic
+      - main/nodejs-lts
+      - main/rust
       - nerd-fonts/CascadiaCode-NF
       - nerd-fonts/CascadiaMono-NF
 

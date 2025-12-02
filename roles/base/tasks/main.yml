@@ -1,8 +1,17 @@
 ---
 # tasks file for base
-- name: Install PowerShell
+- name: Install packages through winget
   ansi_colle.mods.winget_cmd:
-    id: Microsoft.PowerShell
+    id: "{{ item }}"
+  loop:
+    - Microsoft.PowerShell
+    - Mozilla.Firefox  # cannot change default browser by PowerShell
+
+- name: Install restic on machine scope, recommended by documentation
+  become: true
+  ansi_colle.mods.winget_cmd:
+    id: restic.restic
+    scope: machine
 
 - name: Remove unused packages
   ansible.windows.win_package:
@@ -13,11 +22,10 @@
     - Microsoft.MicrosoftSolitaireCollection
     - Microsoft.Paint
     - Microsoft.WindowsCamera
-
-- name: Install Firefox, cannot change default browser due to Microsoft Policy
-  when: base_firefox
-  ansi_colle.mods.winget_cmd:
-    id: Mozilla.Firefox
+    - Microsoft.OutlookForWindows
+    - Microsoft.WindowsFeedbackHub
+    - MicrosoftCorporationII.QuickAssist
+    - Microsoft.WindowsSoundRecorder
 
 - name: Change Windows configuration by registry
   ansible.builtin.include_tasks:
