@@ -17,4 +17,3 @@
         scoop_gui_apps: true
     - role: ansi_colle.windows.dev
       tags: dev
-
