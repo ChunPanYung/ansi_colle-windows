@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.2.0] - 2025-12-02
+
+### 🚀 Features
+
+- [**breaking**] Remove unused role.
+- Remove additional packages.
+- Install nodejs and rust lang.
+
+### 📚 Documentation
+
+- Change editorconfig.
+
 ## [1.1.0] - 2025-11-30
 
 ### 🚀 Features
