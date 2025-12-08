@@ -16,5 +16,6 @@
   community.windows.win_scoop:
     name:
       - main/7zip
+      - main/espanso
       - extras/keepassxc
       - extras/qownnotes
