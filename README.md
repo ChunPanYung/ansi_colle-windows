@@ -1,4 +1,4 @@
-# Ansible Collection - ansi_colle.wsl
+# Ansible Collection - ansi_colle.windows
 
 This collections assume user configure/connect to remote Windows host using SSH.
 For more information how to setup, Execute/look at `Setup-SSH.ps1` in this directory.
