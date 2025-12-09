@@ -26,6 +26,7 @@
     - Microsoft.WindowsFeedbackHub
     - MicrosoftCorporationII.QuickAssist
     - Microsoft.WindowsSoundRecorder
+    - Microsoft.MicrosoftOfficeHub
 
 - name: Change Windows configuration by registry
   ansible.builtin.include_tasks:
