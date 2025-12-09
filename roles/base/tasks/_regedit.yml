@@ -53,3 +53,10 @@
     name: 'SearchboxTaskbarMode'
     type: dword
     data: 3
+
+- name: Set the Taskbar buttons to combine when full
+  ansible.windows.win_regedit:
+    path: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+    name: 'TaskbarGlomLevel'
+    type: dword
+    data: 1
