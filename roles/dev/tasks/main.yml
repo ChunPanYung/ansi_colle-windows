@@ -16,6 +16,22 @@
     - Microsoft.VisualStudioCode
     - Docker.DockerDesktop
 
+- name: Add Scoop buckets
+  community.windows.win_scoop_bucket:
+    name: nerd-fonts
+
+- name: Install dev packages
+  when: scoop_dev_apps
+  community.windows.win_scoop:
+    name:
+      - main/python
+      - main/gnupg
+      - main/oh-my-posh
+      - main/nodejs-lts
+      - main/rust
+      - nerd-fonts/CascadiaCode-NF
+      - nerd-fonts/CascadiaMono-NF
+
 - name: Create a directory for CLI binaries path
   vars:
     dev_bin_path: "{{ ansible_user_dir }}\\AppData\\Local\\User32"

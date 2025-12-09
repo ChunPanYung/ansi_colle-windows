@@ -6,29 +6,16 @@
   loop:
     - main
     - extras
-    - nerd-fonts
 
 - name: Install required packages by scoop to update packages
   community.windows.win_scoop:
     name: main/git
-
-- name: Install dev packages
-  when: scoop_dev_apps
-  community.windows.win_scoop:
-    name:
-      - main/python
-      - main/gnupg
-      - main/oh-my-posh
-      - main/nodejs-lts
-      - main/rust
-      - nerd-fonts/CascadiaCode-NF
-      - nerd-fonts/CascadiaMono-NF
 
 - name: Install GUI packages
   when: scoop_gui_apps
   community.windows.win_scoop:
     name:
       - main/7zip
+      - main/espanso
       - extras/keepassxc
-      - extras/nextcloud
       - extras/qownnotes

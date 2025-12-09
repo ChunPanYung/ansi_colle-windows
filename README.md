@@ -1,4 +1,4 @@
-# Ansible Collection - ansi_colle.wsl
+# Ansible Collection - ansi_colle.windows
 
 This collections assume user configure/connect to remote Windows host using SSH.
 For more information how to setup, Execute/look at `Setup-SSH.ps1` in this directory.
@@ -6,41 +6,37 @@ For more information how to setup, Execute/look at `Setup-SSH.ps1` in this direc
 ## Quick Start
 
 1. Execute `bootstrap.ps1` with PowerShell version 5 or above.
-2. On a different machine, setup [inventory file](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html):
+2. On a different machine(Linux), install
+[ansible](https://docs.ansible.com/projects/ansible/latest/installation_guide/intro_installation.html)
+and [task](https://taskfile.dev/docs/installation).
+3. Setup [inventory file](https://docs.ansible.com/projects/ansible/latest/inventory_guide/intro_inventory.html):
 
     ```ini
     ; hosts.ini
     [windows]
-    windows_os
+    windows_11_home ansible_host=192.168.x.xxx ansible_user=user_name
 
     [windows:vars]
-    ansible_user=username
     ansible_connection=powershell
     ansible_become_method=runas
     ```
 
-3. Setup SSH agent to avoid retyping passwords
+4. Setup SSH agent to avoid retyping passwords
 
     ```bash
     ssh-agent bash
     ssh-add ~/.ssh/ansible
     ```
 
-4. Run the following command:
+5. Run the following command:
 
     ```bash
-    export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml
+    export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
     export ANSIBLE_INVENTORY=hosts.ini  # inventory file path
+    export ANSIBLE_VERBOSITY=1  # SEt verbosity, default is 0
 
-    ansible-galaxy collection install \
-        git+https://github.com/ChunPanYung/ansi_colle-windows.git
-
-    # Run this to update every time
-    ansible-playbook ansi_colle.windows.install
-
-    # Run this after update, it will ask you sudo password
-    ansible-playbook ansi_colle.windows.site --connection=local \
-        --inventory 127.0.0.1, --ask-become-pass --verbose
+    task install:main  #  Install this collection from main branch
+    task run:local:all  # Execute ansi_colle.windows.site with all roles
     ```
 
 ## Setup Before Running
