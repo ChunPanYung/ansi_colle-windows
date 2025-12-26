@@ -35,8 +35,10 @@ and [task](https://taskfile.dev/docs/installation).
     export ANSIBLE_INVENTORY=hosts.ini  # inventory file path
     export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
 
-    task install:main  #  Install this collection from main branch
-    task run:local:all  # Execute ansi_colle.windows.site with all roles
+    #  Install this collection from main branch
+    ansible-playbook ./playbooks/install.yml --extra-vars git_branch=main
+    # Execute ansi_colle.windows.site with all roles
+    ansible-playbook ansi_colle.windows.site
     ```
 
 ## Setup Before Running
