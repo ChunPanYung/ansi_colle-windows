@@ -33,7 +33,7 @@ and [task](https://taskfile.dev/docs/installation).
     ```bash
     export ANSIBLE_CALLBACK_RESULT_FORMAT=yaml  # yaml output format instead of json
     export ANSIBLE_INVENTORY=hosts.ini  # inventory file path
-    export ANSIBLE_VERBOSITY=1  # SEt verbosity, default is 0
+    export ANSIBLE_VERBOSITY=1  # Set verbosity, default is 0
 
     task install:main  #  Install this collection from main branch
     task run:local:all  # Execute ansi_colle.windows.site with all roles
